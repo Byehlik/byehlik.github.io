@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Byehlik — AI-Powered Org Transformation</title>
+  <meta name="description" content="I help companies in flux get their people and data working together. 30 years of transformation across 6 countries, now powered by AI." />
+  <meta property="og:title" content="Byehlik — AI-Powered Org Transformation" />
+  <meta property="og:description" content="Senior HR executive turned AI builder. $10M+ in documented savings. Now building the tools that make transformation faster." />
+  <meta property="og:url" content="https://byehlik.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #07050f;
+      --deep:     #0f0a20;
+      --void:     #160e2e;
+      --purple:   #6B46C1;
+      --violet:   #7c5cd6;
+      --lavender: #a78bfa;
+      --silver:   #b8b8cc;
+      --fog:      #7a7a8c;
+      --white:    #f0eeff;
+      --cream:    #e8e4ff;
+      --gold:     #c8b87a;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Outfit', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 clamp(24px, 5vw, 72px);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7, 5, 15, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(107, 70, 193, 0.15);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 34px;
+      height: 34px;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--fog);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--lavender); }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid rgba(107, 70, 193, 0.5);
+      color: var(--lavender);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 9px 22px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: var(--white);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 120px clamp(24px, 5vw, 72px) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(107, 70, 193, 0.18) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      pointer-events: none;
+    }
+
+    .hero-glow-2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%);
+      bottom: 10%;
+      right: 10%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--lavender);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out-expo) 0.1s forwards;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--lavender);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.2s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--lavender);
+    }
+
+    .hero-desc {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--silver);
+      max-width: 580px;
+      margin: 0 auto 48px;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.35s forwards;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s var(--ease-out-expo) 0.45s forwards;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 14px 32px;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--violet);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(107, 70, 193, 0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--silver);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      padding: 14px 32px;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--lavender);
+      color: var(--lavender);
+    }
+
+    /* ─── STATS STRIP ─── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(107, 70, 193, 0.2);
+      border-bottom: 1px solid rgba(107, 70, 193, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      padding: 40px clamp(24px, 4vw, 64px);
+      border-right: 1px solid rgba(107, 70, 193, 0.15);
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out-expo) forwards;
+    }
+
+    .stat:nth-child(1) { animation-delay: 0.5s; }
+    .stat:nth-child(2) { animation-delay: 0.6s; }
+    .stat:nth-child(3) { animation-delay: 0.7s; border-right: none; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300;
+      color: var(--lavender);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--fog);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: clamp(64px, 10vw, 120px) clamp(24px, 5vw, 72px);
+      position: relative;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--purple);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-eyebrow::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--purple);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 300;
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--silver);
+      font-weight: 300;
+      max-width: 480px;
+      margin-bottom: 56px;
+    }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--deep); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: rgba(107, 70, 193, 0.15);
+      border: 1px solid rgba(107, 70, 193, 0.15);
+    }
+
+    .service-card {
+      background: var(--deep);
+      padding: 40px 36px;
+      transition: background 0.3s;
+    }
+
+    .service-card:hover {
+      background: var(--void);
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 24px;
+      color: var(--lavender);
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--fog);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .service-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      border: 1px solid rgba(107, 70, 193, 0.3);
+      padding: 4px 12px;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    /* ─── PROOF ─── */
+    #proof { background: var(--black); }
+
+    .proof-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(107, 70, 193, 0.12);
+    }
+
+    .proof-card {
+      background: var(--black);
+      padding: 48px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--purple) 0%, transparent 100%);
+    }
+
+    .proof-metric {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 300;
+      color: var(--lavender);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .proof-card h3 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .proof-card p {
+      font-size: 14px;
+      color: var(--fog);
+      line-height: 1.7;
+    }
+
+    .proof-detail {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .proof-detail-item {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--silver);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .proof-detail-item::before {
+      content: '→';
+      color: var(--purple);
+    }
+
+    /* ─── PORTFOLIO ─── */
+    #portfolio { background: var(--deep); }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .app-card {
+      background: var(--black);
+      border: 1px solid rgba(107, 70, 193, 0.15);
+      border-radius: 2px;
+      padding: 32px 28px;
+      transition: all 0.3s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(107, 70, 193, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .app-card:hover {
+      border-color: rgba(107, 70, 193, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .app-card:hover::after { opacity: 1; }
+
+    .app-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .app-card p {
+      font-size: 13px;
+      color: var(--fog);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .app-tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .app-tech span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--purple);
+      letter-spacing: 0.06em;
+    }
+
+    .app-tech span:not(:last-child)::after {
+      content: '·';
+      margin-left: 6px;
+      color: var(--fog);
+    }
+
+    .app-status {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .app-status.soon {
+      background: rgba(107, 70, 193, 0.12);
+      color: var(--lavender);
+      border: 1px solid rgba(107, 70, 193, 0.25);
+    }
+
+    .app-status.live {
+      background: rgba(34, 197, 94, 0.1);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .app-status.soon::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    .app-status.live::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--black); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-left { position: relative; }
+
+    .about-photo-frame {
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 3/4;
+      background: var(--void);
+      border: 1px solid rgba(107, 70, 193, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .about-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--fog);
+    }
+
+    .about-photo-placeholder p {
+      font-size: 12px;
+      color: var(--fog);
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .about-accent {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      width: 80px;
+      height: 80px;
+      background: var(--purple);
+      opacity: 0.15;
+    }
+
+    .about-right {}
+
+    .about-name {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 300;
+      margin-bottom: 4px;
+    }
+
+    .about-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--purple);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .about-bio {
+      font-size: 16px;
+      color: var(--silver);
+      line-height: 1.75;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .about-bio strong {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 36px;
+    }
+
+    .cert {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--silver);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 14px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--fog);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 18px;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .social-link:hover {
+      color: var(--lavender);
+      border-color: rgba(107, 70, 193, 0.4);
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--deep);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-inner .section-eyebrow { justify-content: center; }
+    .contact-inner .section-eyebrow::after { display: none; }
+    .contact-inner .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--purple);
+    }
+
+    .contact-inner .section-title { margin-bottom: 16px; }
+
+    .contact-inner .section-sub {
+      max-width: 100%;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .contact-email {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 3vw, 28px);
+      font-style: italic;
+      color: var(--lavender);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 40px;
+      transition: color 0.25s;
+    }
+
+    .contact-email:hover { color: var(--white); }
+
+    .contact-geo {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fog);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 32px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(107, 70, 193, 0.12);
+      padding: 28px clamp(24px, 5vw, 72px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--fog);
+    }
+
+    .footer-right {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--purple);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(107, 70, 193, 0.15); }
+      .stat:last-child { border-bottom: none; }
+      .proof-container { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo-frame { max-width: 100%; aspect-ratio: 4/3; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <!-- Replace with your actual logo image:
+           <img src="logo.png" alt="Byehlik" height="36" />
+      -->
+      <svg class="nav-logo-mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 3L29 10V24L17 31L5 24V10L17 3Z" stroke="#6B46C1" stroke-width="1.5"/>
+        <path d="M17 3L29 10V24L17 31L5 24V10L17 3Z" fill="rgba(107,70,193,0.06)"/>
+        <circle cx="17" cy="17" r="4" fill="#6B46C1"/>
+        <line x1="13" y1="13" x2="8" y2="10" stroke="#a78bfa" stroke-width="1"/>
+        <line x1="21" y1="13" x2="26" y2="10" stroke="#a78bfa" stroke-width="1"/>
+        <line x1="17" y1="21" x2="17" y2="27" stroke="#a78bfa" stroke-width="1"/>
+        <line x1="13" y1="21" x2="8" y2="24" stroke="#a78bfa" stroke-width="0.5" opacity="0.5"/>
+        <line x1="21" y1="21" x2="26" y2="24" stroke="#a78bfa" stroke-width="0.5" opacity="0.5"/>
+      </svg>
+      <span class="nav-logo-text">Byehlik</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#proof">Results</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Let's talk</a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">AI-powered org transformation</div>
+      <h1>I help companies in flux get their <em>people and data</em> working together</h1>
+      <p class="hero-desc">30 years fixing what is broken in organizations across 6 countries. Now combining that experience with AI automation and data science to do it faster and at scale.</p>
+      <div class="hero-btns">
+        <a href="#portfolio" class="btn-primary">Explore portfolio</a>
+        <a href="#proof" class="btn-ghost">See the results</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ STATS ═══ -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">$10M+</div>
+      <div class="stat-label">documented savings<br>in a single engagement</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">countries · Poland · Puerto Rico<br>USA · Hungary · Germany · UK</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3,300+</div>
+      <div class="stat-label">employees led<br>across industries</div>
+    </div>
+  </div>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services">
+    <div class="section-eyebrow">What I do</div>
+    <h2 class="section-title reveal">Services</h2>
+    <p class="section-sub reveal">From diagnosis to deployment — hands-on, not just advisory.</p>
+
+    <div class="services-grid reveal">
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="14" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="22" y1="10" x2="22" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="22" y1="22" x2="30" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="22" cy="22" r="2" fill="currentColor"/>
+        </svg>
+        <h3>Org Health Check</h3>
+        <p>A structured 2–4 week audit of people operations, processes, and AI readiness. Delivered as a prioritized action plan with clear ROI estimates.</p>
+        <span class="service-tag">Fixed fee · fast start</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="28" width="8" height="10" rx="1" stroke="currentColor" stroke-width="1.2"/>
+          <rect x="18" y="20" width="8" height="18" rx="1" stroke="currentColor" stroke-width="1.2"/>
+          <rect x="30" y="10" width="8" height="28" rx="1" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M10 24L22 16L34 8" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <h3>Transformation Engagement</h3>
+        <p>Embedded 3–9 month partnership. Build the structure, fix what is broken, deploy AI tools, and hand off a running operation with measurable results.</p>
+        <span class="service-tag">Deep · long-term · results</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 32C12 24 16 18 22 16C28 18 32 24 32 32" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="22" y1="10" x2="22" y2="16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="22" cy="8" r="2" fill="currentColor"/>
+          <path d="M16 32L12 36M28 32L32 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+          <rect x="14" y="30" width="16" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        <h3>AI Tools &amp; Automation</h3>
+        <p>Build and deploy AI agents, automation workflows (n8n), and predictive dashboards. Not just recommendations — working software you can use tomorrow.</p>
+        <span class="service-tag">Python · n8n · Streamlit</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="16" r="5" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="30" cy="28" r="5" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M14 21V26C14 27.1 14.9 28 16 28H24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="30" y1="10" x2="30" y2="22" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <h3>Fractional CHRO</h3>
+        <p>Senior HR leadership on a retained monthly basis. Strategy, team development, and crisis management — without the full-time cost.</p>
+        <span class="service-tag">Ongoing · flexible · senior</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PROOF ═══ -->
+  <section id="proof">
+    <div class="section-eyebrow">Proof of work</div>
+    <h2 class="section-title reveal">Results that hold</h2>
+    <p class="section-sub reveal">Real numbers from real transformations.</p>
+
+    <div class="proof-container reveal">
+
+      <div class="proof-card">
+        <div class="proof-metric">+17pts</div>
+        <h3>Contact Center Turnaround — Insurance, Puerto Rico</h3>
+        <p>Rebuilt operations from scratch post-merger in a fully bilingual environment. Turned a struggling contact center into an award-winning operation.</p>
+        <div class="proof-detail">
+          <div class="proof-detail-item">Client retention: 67% → 84%</div>
+          <div class="proof-detail-item">$10M in annual premium savings</div>
+          <div class="proof-detail-item">ICMI Global Awards finalist</div>
+          <div class="proof-detail-item">Attracted nr 1 dealership + nr 1 bank in Latin America</div>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <div class="proof-metric">65 proj.</div>
+        <h3>Retail Group Transformation — Poland (nr 1 electronics)</h3>
+        <p>Led the full HR transformation of a multi-format retail group covering electronics, e-store, café, and central warehouse operations.</p>
+        <div class="proof-detail">
+          <div class="proof-detail-item">60 → 300 stores · 3,300 employees</div>
+          <div class="proof-detail-item">15.4% compensation cost reduction</div>
+          <div class="proof-detail-item">€1.1M EU training grant secured</div>
+          <div class="proof-detail-item">60% HRIS implementation cost savings</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PORTFOLIO ═══ -->
+  <section id="portfolio">
+    <div class="section-eyebrow">Tools &amp; apps</div>
+    <h2 class="section-title reveal">Portfolio</h2>
+    <p class="section-sub reveal">AI-powered business applications — built for real problems I've seen in 30 years of transformation work.</p>
+
+    <div class="apps-grid reveal">
+
+      <div class="app-card">
+        <h3>Insurance Charge Predictor</h3>
+        <p>Predict insurance premium costs and surface the top risk variables driving them. Built with PyCaret and Streamlit.</p>
+        <div class="app-tech">
+          <span>Python</span><span>PyCaret</span><span>Streamlit</span>
+        </div>
+        <span class="app-status soon">Coming soon</span>
+      </div>
+
+      <div class="app-card">
+        <h3>Workforce Cost Modeler</h3>
+        <p>Scenario-based labor cost forecasting by role, location, and growth plan. For CHROs and CFOs who need to plan fast.</p>
+        <div class="app-tech">
+          <span>Python</span><span>pandas</span><span>Streamlit</span>
+        </div>
+        <span class="app-status soon">Coming soon</span>
+      </div>
+
+      <div class="app-card">
+        <h3>Churn Risk Predictor</h3>
+        <p>Identify clients or employees at risk of leaving — and the reasons why. The model behind the $10M retention result, productized.</p>
+        <div class="app-tech">
+          <span>Python</span><span>PyCaret</span><span>Streamlit</span>
+        </div>
+        <span class="app-status soon">Coming soon</span>
+      </div>
+
+      <div class="app-card">
+        <h3>HR Analytics Dashboard</h3>
+        <p>Hiring funnel, attrition, engagement, and labor cost — unified in one live dashboard. The capstone application.</p>
+        <div class="app-tech">
+          <span>Python</span><span>Plotly</span><span>Streamlit</span>
+        </div>
+        <span class="app-status soon">Coming soon</span>
+      </div>
+
+    </div>
+
+    <!-- GitHub link -->
+    <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
+      <a href="https://github.com/byehlik" class="btn-ghost" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        View on GitHub
+      </a>
+      <a href="https://linkedin.com/in/annarogowska" class="btn-ghost" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+        </svg>
+        LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about">
+    <div class="section-eyebrow">About</div>
+
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="about-photo-frame">
+          <!--
+            TO ADD YOUR PHOTO:
+            1. Upload your photo to the same folder as index.html
+            2. Name it: photo.jpg
+            3. Replace the div below with:
+               <img src="photo.jpg" alt="Anna Rogowska" />
+          -->
+          <div class="about-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="18" r="9" stroke="#6B46C1" stroke-width="1.5"/>
+              <path d="M6 42C6 33.16 14.06 26 24 26C33.94 26 42 33.16 42 42" stroke="#6B46C1" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <p>Add photo.jpg to your repository folder</p>
+          </div>
+        </div>
+        <div class="about-accent"></div>
+      </div>
+
+      <div class="about-right reveal">
+        <h2 class="about-name">Anna M. Rogowska</h2>
+        <div class="about-title">Founder · Byehlik</div>
+        <p class="about-bio">
+          I've rebuilt organizations others gave up on.<br><br>
+          <strong>30 years. 6 countries.</strong> BPO, retail, insurance, FMCG. I walk into companies with broken processes, disengaged people, and no data — and leave behind running operations, motivated teams, and numbers that hold.<br><br>
+          Now I'm adding a new layer: <strong>AI agents, automation, and data science.</strong> Building predictive tools that make transformation faster and the results more durable.
+        </p>
+        <div class="certs">
+          <span class="cert">SPHR — HRCI</span>
+          <span class="cert">CCSL — ICMI</span>
+          <span class="cert">AI Agents — n8n</span>
+          <span class="cert">Data Science — Python</span>
+          <span class="cert">PyCaret · Streamlit</span>
+        </div>
+        <div class="social-links">
+          <a href="https://linkedin.com/in/annarogowska" class="social-link" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/byehlik" class="social-link" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-eyebrow">Contact</div>
+      <h2 class="section-title reveal">Let's work together</h2>
+      <p class="section-sub reveal">If your organization is in growth, crisis, or restructuring — and you want someone who has been there before — let's talk.</p>
+      <a href="mailto:hello@byehlik.com" class="contact-email reveal">hello@byehlik.com</a>
+      <div class="hero-btns" style="justify-content:center;">
+        <a href="https://linkedin.com/in/annarogowska" class="btn-primary" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+      </div>
+      <div class="contact-geo reveal">Warsaw, Poland · Available globally · EN / ES / PL / DE</div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <span class="footer-copy">© 2025 Byehlik · Anna M. Rogowska</span>
+    <span class="footer-right">byehlik.com</span>
+  </footer>
+
+  <!-- ═══ SCROLL REVEAL ═══ -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
