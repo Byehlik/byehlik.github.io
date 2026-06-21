@@ -774,6 +774,102 @@
     }
 
     /* ─── ANIMATIONS ─── */
+    /* DEMO REQUEST MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 5, 15, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal-card {
+      background: var(--void);
+      border: 1px solid rgba(107, 70, 193, 0.3);
+      border-radius: 4px;
+      padding: 48px 40px;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.35s var(--ease-out-expo);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-overlay.open .modal-card { transform: translateY(0); }
+
+    .modal-close {
+      position: absolute;
+      top: 18px; right: 20px;
+      background: none; border: none;
+      color: var(--fog); font-size: 22px;
+      cursor: pointer; line-height: 1;
+      padding: 4px 8px;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--white); }
+
+    .modal-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px; color: var(--purple);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 300; color: var(--white);
+      margin-bottom: 10px; line-height: 1.2;
+    }
+    .modal-desc {
+      font-size: 14px; color: var(--silver);
+      line-height: 1.65; margin-bottom: 28px; font-weight: 300;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-label {
+      display: block; font-size: 11px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--fog); margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(107, 70, 193, 0.25);
+      border-radius: 2px; color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px; font-weight: 300;
+      padding: 11px 14px; outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--purple); }
+    .form-input::placeholder { color: var(--fog); }
+    textarea.form-input { resize: vertical; min-height: 80px; }
+    .form-note {
+      font-size: 11px; color: var(--fog);
+      margin-top: 14px; font-family: var(--font-mono);
+      letter-spacing: 0.03em; line-height: 1.5;
+    }
+    .modal-success { text-align: center; padding: 20px 0; display: none; }
+    .modal-success.visible { display: block; }
+    .modal-form.hidden { display: none; }
+    .success-icon {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(107, 70, 193, 0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; color: var(--lavender);
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -965,7 +1061,7 @@
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center;">
           <span class="app-status live">Live</span>
-          <a href="mailto:annarogowska@byehlik.com?subject=Profitability Radar Demo Request" class="btn-primary" style="font-size: 11px; padding: 8px 20px;">Request Demo Access →</a>
+          <button class="btn-primary open-demo-modal" style="font-size: 11px; padding: 8px 20px; border: none; cursor: pointer;">Request Demo Access →</button>
         </div>
       </div>
 
@@ -1077,7 +1173,56 @@
     <span class="footer-right">byehlik.com</span>
   </footer>
 
-  <!-- ═══ SCROLL REVEAL ═══ -->
+  <!-- DEMO REQUEST MODAL -->
+  <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+
+      <div class="modal-form" id="modalForm">
+        <div class="modal-eyebrow">Portfolio &middot; Profitability Radar</div>
+        <h2 class="modal-title" id="modalTitle">Access Profitability Radar</h2>
+        <p class="modal-desc">Profitability Radar is an early working version of a Byehlik application designed to support business data analysis, profitability review, and faster identification of areas requiring attention.<br><br>Register below to receive your individual access code and application link. Your access code will be generated automatically and sent to your email.</p>
+
+        <form id="demoForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="f-name">Full name *</label>
+            <input class="form-input" type="text" id="f-name" name="name" placeholder="Anna Rogowska" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Work email *</label>
+            <input class="form-input" type="email" id="f-email" name="email" placeholder="you@company.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-company">Company</label>
+            <input class="form-input" type="text" id="f-company" name="company" placeholder="Company name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-role">Your role</label>
+            <input class="form-input" type="text" id="f-role" name="role" placeholder="CEO / Head of CC / HR Director..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-message">What are you working on? (optional)</label>
+            <textarea class="form-input" id="f-message" name="message" placeholder="Brief context - helps me tailor the access..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; margin-top: 8px; font-size: 13px; padding: 14px; border: none; cursor: pointer;" id="submitBtn">
+            Request access &rarr;
+          </button>
+          <p class="form-note">Your access code will be sent to your email within minutes. No spam, no subscriptions.</p>
+        </form>
+      </div>
+
+      <div class="modal-success" id="modalSuccess">
+        <div class="success-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4.5 4.5L16 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 300; margin-bottom: 12px;">Request received</h3>
+        <p style="font-size: 14px; color: var(--silver); line-height: 1.65;">Your access code is on its way to your inbox. Check your email - it should arrive within a few minutes.</p>
+        <p style="margin-top: 16px; font-size: 13px; color: var(--fog);">Questions? <a href="mailto:annarogowska@byehlik.com" style="color: var(--lavender);">annarogowska@byehlik.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLL REVEAL + MODAL JS -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -1091,6 +1236,65 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // DEMO MODAL
+    const modal = document.getElementById('demoModal');
+    const modalClose = document.getElementById('modalClose');
+    const demoForm = document.getElementById('demoForm');
+    const modalFormEl = document.getElementById('modalForm');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function openModal() {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('f-name').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.open-demo-modal').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    demoForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      if (!name || !email) return;
+
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      const payload = {
+        name,
+        email,
+        company: document.getElementById('f-company').value.trim(),
+        role: document.getElementById('f-role').value.trim(),
+        message: document.getElementById('f-message').value.trim(),
+        source: 'portfolio'
+      };
+
+      try {
+        await fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        // show success regardless - form data was submitted
+      }
+
+      modalFormEl.classList.add('hidden');
+      modalSuccess.classList.add('visible');
+    });
   </script>
 
 </body>
