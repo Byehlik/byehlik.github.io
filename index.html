@@ -1283,15 +1283,20 @@
         source: 'portfolio'
       };
 
-      try {
-        await fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-capture', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {
-        // show success regardless - form data was submitted
-      }
+      const track1 = fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(err => {});
+
+      const track2 = fetch('https://script.google.com/macros/s/AKfycbxAc5SiKTHTN_SAOAl09YprZdnnou_itY9orTHv483Lw_jJ_G7CskGoKU9DZKdhv5mt/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).catch(err => {});
+
+      // show success regardless - both tracks fire independently, form data was submitted
+      await Promise.allSettled([track1, track2]);
 
       modalFormEl.classList.add('hidden');
       modalSuccess.classList.add('visible');
