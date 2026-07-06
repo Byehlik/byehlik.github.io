@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Byehlik — Style Test v0 (LIVE na byehlik.com) — nie publikować</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ═══ Skopiowane 1:1 z LIVE index.html (origin/main, commit 75cf612) ═══ */
+  :root {
+    --black:    #07050f;
+    --deep:     #0f0a20;
+    --void:     #160e2e;
+    --purple:   #6B46C1;
+    --violet:   #7c5cd6;
+    --lavender: #a78bfa;
+    --silver:   #b8b8cc;
+    --fog:      #7a7a8c;
+    --white:    #f0eeff;
+    --cream:    #e8e4ff;
+    --gold:     #c8b87a;
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Outfit', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 40px clamp(20px, 5vw, 72px) 120px;
+  }
+
+  /* ═══ Layout strony testowej (nie ma go w index.html) ═══ */
+  .test-header {
+    max-width: 900px;
+    margin: 0 auto 56px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(107, 70, 193, 0.3);
+  }
+
+  .test-header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .test-header p {
+    font-size: 14px;
+    color: var(--silver);
+    max-width: 640px;
+  }
+
+  .test-section {
+    max-width: 900px;
+    margin: 0 auto 64px;
+  }
+
+  .test-section-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--purple);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(107, 70, 193, 0.15);
+  }
+
+  .test-note {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    color: var(--fog);
+    margin-top: 6px;
+  }
+
+  /* ═══ COLORS ═══ */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .swatch {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .swatch-color { height: 70px; }
+
+  .swatch-info {
+    padding: 10px 12px;
+    background: var(--void);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .swatch-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fog);
+  }
+
+  .swatch-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .swatch-tag.official { background: rgba(34, 197, 94, 0.12); color: #4ade80; }
+  .swatch-tag.mismatch { background: rgba(220, 100, 100, 0.15); color: #f08080; }
+  .swatch-tag.extension { background: rgba(200, 184, 122, 0.15); color: var(--gold); }
+
+  /* ═══ TYPOGRAPHY (dokładne rozmiary z live index.html) ═══ */
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+  }
+
+  .type-label {
+    width: 160px;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fog);
+  }
+
+  .type-sample-h1     { font-family: var(--font-display); font-size: 48px; font-weight: 300; letter-spacing: -0.01em; }
+  .type-sample-title  { font-family: var(--font-display); font-size: 40px; font-weight: 300; }
+  .type-sample-h3     { font-family: var(--font-display); font-size: 22px; font-weight: 400; }
+  .type-sample-body   { font-family: var(--font-body); font-size: 16px; color: var(--silver); font-weight: 300; max-width: 480px; }
+  .type-sample-eyebrow{ font-family: var(--font-mono); font-size: 11px; color: var(--purple); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* ═══ LETTER CASE COMPARISON ═══ */
+  .case-grid { display: grid; gap: 10px; }
+
+  .case-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--void);
+    border-radius: 2px;
+  }
+
+  .case-row-label {
+    width: 140px;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fog);
+  }
+
+  .case-sample { font-family: var(--font-body); font-size: 14px; letter-spacing: 0.05em; }
+
+  .case-uppercase   { text-transform: uppercase; }
+  .case-capitalize  { text-transform: capitalize; }
+  .case-lower       { text-transform: lowercase; }
+  .case-none        {}
+
+  /* ═══ BUTTONS (skopiowane z live index.html) ═══ */
+  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+  .btn-primary {
+    background: var(--purple); color: var(--white); border: none;
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.05em; padding: 14px 32px; border-radius: 2px;
+    cursor: pointer; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost {
+    background: transparent; color: var(--silver); border: 1px solid rgba(255,255,255,0.12);
+    font-family: var(--font-body); font-size: 13px; font-weight: 400;
+    letter-spacing: 0.05em; padding: 14px 32px; border-radius: 2px;
+    cursor: pointer; text-decoration: none; display: inline-block;
+  }
+  .nav-cta {
+    background: transparent; border: 1px solid rgba(107, 70, 193, 0.5); color: var(--lavender);
+    font-family: var(--font-body); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 9px 22px;
+    border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block;
+  }
+
+  /* ═══ TAGS / BADGES ═══ */
+  .tag-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 100px;
+    padding: 6px 18px; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: var(--lavender);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .service-tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--purple);
+    border: 1px solid rgba(107, 70, 193, 0.3); padding: 4px 12px;
+    border-radius: 100px; display: inline-block;
+  }
+  .app-status {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 100px;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .app-status.live { background: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+  .app-status.soon { background: rgba(107, 70, 193, 0.12); color: var(--lavender); border: 1px solid rgba(107, 70, 193, 0.25); }
+</style>
+</head>
+<body>
+
+  <div class="test-header">
+    <h1>Style Test v0 — wersja LIVE (byehlik.com)</h1>
+    <p>To jest paleta i typografia aktualnie opublikowanej strony (origin/main, commit <code>75cf612</code>) — <strong>inna</strong> niż lokalna wersja robocza w <code>style-test.html</code> (commit <code>c4e935f</code>, jeszcze niewypchnięty). Porównaj oba pliki obok siebie w przeglądarce, żeby zdecydować, które fonty/kolory zostają.</p>
+  </div>
+
+  <!-- ═══ COLORS ═══ -->
+  <div class="test-section">
+    <div class="test-section-title">1. Kolory (LIVE)</div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--deep)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--deep</div>
+          <div class="swatch-hex">#0f0a20</div>
+          <span class="swatch-tag mismatch">Guidelines: #1a0a3d</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--purple)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--purple</div>
+          <div class="swatch-hex">#6B46C1</div>
+          <span class="swatch-tag official">Guidelines ✓</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--silver)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--silver</div>
+          <div class="swatch-hex">#b8b8cc</div>
+          <span class="swatch-tag mismatch">Guidelines: #C0C0C0</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--white); border:1px solid #333"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--white</div>
+          <div class="swatch-hex">#f0eeff</div>
+          <span class="swatch-tag mismatch">Guidelines: #FFFFFF</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--black)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--black</div>
+          <div class="swatch-hex">#07050f</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--void)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--void</div>
+          <div class="swatch-hex">#160e2e</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--violet)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--violet</div>
+          <div class="swatch-hex">#7c5cd6</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--lavender)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--lavender</div>
+          <div class="swatch-hex">#a78bfa</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--fog)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--fog</div>
+          <div class="swatch-hex">#7a7a8c</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--cream)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--cream</div>
+          <div class="swatch-hex">#e8e4ff</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--gold)"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">--gold</div>
+          <div class="swatch-hex">#c8b87a</div>
+          <span class="swatch-tag extension">Nie ma w Guidelines</span>
+        </div>
+      </div>
+    </div>
+    <p class="test-note">Czerwony tag = w Guidelines jest inny odcień tego samego koloru (do decyzji, który zostaje). Ciekawostka: lokalna wersja robocza (<code>style-test.html</code>) ma <code>--deep</code> i <code>--silver</code> już poprawione dokładnie na wartości z Guidelines — LIVE jeszcze nie.</p>
+  </div>
+
+  <!-- ═══ TYPOGRAPHY ═══ -->
+  <div class="test-section">
+    <div class="test-section-title">2. Typografia (LIVE — 3 różne fonty, żaden nie jest w Guidelines)</div>
+
+    <div class="type-row">
+      <div class="type-label">Hero H1<br><span style="opacity:.6">Cormorant Garamond</span></div>
+      <div class="type-sample-h1">30 years of transformation.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Section title<br><span style="opacity:.6">Cormorant Garamond</span></div>
+      <div class="type-sample-title">Services</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Card H3<br><span style="opacity:.6">Cormorant Garamond</span></div>
+      <div class="type-sample-h3">Org Health Check</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body / opis<br><span style="opacity:.6">Outfit</span></div>
+      <div class="type-sample-body">From diagnosis to deployment — hands-on, not just advisory.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Eyebrow / mono<br><span style="opacity:.6">JetBrains Mono</span></div>
+      <div class="type-sample-eyebrow">What I do</div>
+    </div>
+  </div>
+
+  <!-- ═══ LETTER CASE COMPARISON ═══ -->
+  <div class="test-section">
+    <div class="test-section-title">3. Wielkość liter — porównanie wariantów (nieustalone w Guidelines)</div>
+    <div class="case-grid">
+      <div class="case-row">
+        <div class="case-row-label">Nav link — teraz</div>
+        <div class="case-sample case-uppercase">Services</div>
+      </div>
+      <div class="case-row">
+        <div class="case-row-label">Capitalize</div>
+        <div class="case-sample case-capitalize">Services</div>
+      </div>
+      <div class="case-row">
+        <div class="case-row-label">Normalny</div>
+        <div class="case-sample case-none">Services</div>
+      </div>
+      <div class="case-row">
+        <div class="case-row-label">lowercase</div>
+        <div class="case-sample case-lower">Services</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BUTTONS ═══ -->
+  <div class="test-section">
+    <div class="test-section-title">4. Przyciski</div>
+    <div class="btn-row">
+      <a href="#" class="btn-primary">Explore portfolio</a>
+      <a href="#" class="btn-ghost">See the results</a>
+      <a href="#" class="nav-cta">Let's talk</a>
+    </div>
+  </div>
+
+  <!-- ═══ TAGS / BADGES ═══ -->
+  <div class="test-section">
+    <div class="test-section-title">5. Tagi i odznaki</div>
+    <div class="tag-row">
+      <span class="hero-badge">Operations Leadership</span>
+      <span class="service-tag">Fixed fee · fast start</span>
+      <span class="app-status live">Live</span>
+      <span class="app-status soon">Coming soon</span>
+    </div>
+  </div>
+
+</body>
+</html>
