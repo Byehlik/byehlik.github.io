@@ -1294,20 +1294,30 @@
         source: 'portfolio'
       };
 
-      const track1 = fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).catch(err => {});
+      let track1Ok = false;
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const res = await fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        track1Ok = res.ok;
+      } catch (err) {
+        track1Ok = false;
+      }
 
-      const track2 = fetch('https://script.google.com/macros/s/AKfycbxAc5SiKTHTN_SAOAl09YprZdnnou_itY9orTHv483Lw_jJ_G7CskGoKU9DZKdhv5mt/exec', {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      }).catch(err => {});
-
-      // show success regardless - both tracks fire independently, form data was submitted
-      await Promise.allSettled([track1, track2]);
+      // Track 2 (Apps Script) is a fallback - only fires if Track 1 (n8n) failed or timed out after 5s
+      if (!track1Ok) {
+        await fetch('https://script.google.com/macros/s/AKfycbxAc5SiKTHTN_SAOAl09YprZdnnou_itY9orTHv483Lw_jJ_G7CskGoKU9DZKdhv5mt/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        }).catch(err => {});
+      }
 
       modalFormEl.classList.add('hidden');
       modalSuccess.classList.add('visible');
