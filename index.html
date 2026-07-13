@@ -1196,6 +1196,10 @@
         <p class="modal-desc">Profitability Radar is an early working version of a Byehlik application designed to support business data analysis, profitability review, and faster identification of areas requiring attention.<br><br>Register below to receive your individual access code and application link. Your access code will be generated automatically and sent to your email.</p>
 
         <form id="demoForm" novalidate>
+          <div class="form-group" style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <div class="form-group">
             <label class="form-label" for="f-name">Full name *</label>
             <input class="form-input" type="text" id="f-name" name="name" placeholder="Anna Rogowska" required />
@@ -1278,6 +1282,15 @@
 
     demoForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Honeypot: real users never see/fill this field. Non-empty = bot.
+      const honeypot = document.getElementById('f-website').value.trim();
+      if (honeypot) {
+        modalFormEl.classList.add('hidden');
+        modalSuccess.classList.add('visible');
+        return;
+      }
+
       const name = document.getElementById('f-name').value.trim();
       const email = document.getElementById('f-email').value.trim();
       if (!name || !email) return;
