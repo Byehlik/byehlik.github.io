@@ -910,6 +910,7 @@
       .btn-primary, .btn-ghost { width: 100%; text-align: center; }
     }
   </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -1220,6 +1221,7 @@
             <label class="form-label" for="f-message">What are you working on? (optional)</label>
             <textarea class="form-input" id="f-message" name="message" placeholder="Brief context - helps me tailor the access..."></textarea>
           </div>
+          <div class="cf-turnstile" id="turnstileWidget" data-sitekey="0x4AAAAAAD1zU1_GOYdgg2YB" style="margin-bottom: 12px;"></div>
           <button type="submit" class="btn-primary" style="width: 100%; margin-top: 8px; font-size: 13px; padding: 14px; border: none; cursor: pointer;" id="submitBtn">
             Request access &rarr;
           </button>
@@ -1270,6 +1272,7 @@
     function closeModal() {
       modal.classList.remove('open');
       document.body.style.overflow = '';
+      if (window.turnstile) turnstile.reset('#turnstileWidget');
     }
 
     document.querySelectorAll('.open-demo-modal').forEach(btn => {
@@ -1298,13 +1301,16 @@
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
 
+      const turnstileTokenEl = document.querySelector('#turnstileWidget [name="cf-turnstile-response"]');
+
       const payload = {
         name,
         email,
         company: document.getElementById('f-company').value.trim(),
         role: document.getElementById('f-role').value.trim(),
         message: document.getElementById('f-message').value.trim(),
-        source: 'portfolio'
+        source: 'portfolio',
+        'cf-turnstile-response': turnstileTokenEl ? turnstileTokenEl.value : ''
       };
 
       let track1Ok = false;
@@ -1334,6 +1340,7 @@
 
       modalFormEl.classList.add('hidden');
       modalSuccess.classList.add('visible');
+      if (window.turnstile) turnstile.reset('#turnstileWidget');
     });
   </script>
 
