@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm your email - Byehlik</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #07050f;
+      --deep:     #0f0a20;
+      --void:     #160e2e;
+      --purple:   #6B46C1;
+      --violet:   #7c5cd6;
+      --lavender: #a78bfa;
+      --silver:   #b8b8cc;
+      --fog:      #7a7a8c;
+      --white:    #f0eeff;
+      --cream:    #e8e4ff;
+      --error:    #e08a8a;
+
+      --font-display: 'Outfit', sans-serif;
+      --font-body:    'Outfit', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    body {
+      background: var(--black) url("../Byehlik_background.png") center center / cover no-repeat;
+      background-attachment: fixed;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: rgba(15, 10, 32, 0.85);
+      border: 1px solid rgba(107, 70, 193, 0.25);
+      border-radius: 4px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 44px 36px;
+      text-align: center;
+    }
+
+    .card-logo {
+      display: inline-block;
+      margin-bottom: 28px;
+    }
+
+    .card-logo img {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
+
+    .icon {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(107, 70, 193, 0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--lavender);
+    }
+
+    .icon.error { border-color: rgba(224, 138, 138, 0.4); color: var(--error); }
+
+    .icon svg { display: block; }
+
+    .spinner {
+      width: 28px; height: 28px;
+      border: 2px solid rgba(167, 139, 250, 0.25);
+      border-top-color: var(--lavender);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .message {
+      font-size: 14px;
+      color: var(--silver);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(167, 139, 250, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .back-link:hover { color: var(--white); }
+
+    .contact-note {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--fog);
+    }
+
+    .contact-note a { color: var(--lavender); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <a href="/" class="card-logo">
+      <img src="../Byehlik_logo_purple.png" alt="Byehlik" />
+    </a>
+
+    <div id="state-loading">
+      <div class="icon"><div class="spinner"></div></div>
+      <h1>Confirming your email...</h1>
+      <p class="message">Just a moment - checking your confirmation link. / Chwila - sprawdzamy Twój link potwierdzający.</p>
+    </div>
+
+    <div id="state-result" style="display:none;">
+      <div class="icon" id="result-icon"></div>
+      <h1 id="result-title"></h1>
+      <p class="message" id="result-message"></p>
+      <p class="contact-note">Questions? <a href="mailto:annarogowska@byehlik.com">annarogowska@byehlik.com</a></p>
+    </div>
+
+    <a href="/" class="back-link">Back to byehlik.com</a>
+  </div>
+
+  <script>
+    const CHECK_ICON = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4.5 4.5L16 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const X_ICON = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+    function showResult(success, title, message) {
+      document.getElementById('state-loading').style.display = 'none';
+      const resultEl = document.getElementById('state-result');
+      const iconEl = document.getElementById('result-icon');
+      iconEl.classList.toggle('error', !success);
+      iconEl.innerHTML = success ? CHECK_ICON : X_ICON;
+      document.getElementById('result-title').textContent = title;
+      document.getElementById('result-message').textContent = message;
+      resultEl.style.display = 'block';
+    }
+
+    const token = new URLSearchParams(window.location.search).get('token');
+
+    if (!token) {
+      showResult(
+        false,
+        'Missing confirmation link',
+        'This link is missing its confirmation code. Please use the link from your email. / Ten link nie zawiera kodu potwierdzającego. Skorzystaj z linku z maila.'
+      );
+    } else {
+      fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-confirm?token=' + encodeURIComponent(token))
+        .then(async (res) => {
+          let data;
+          try {
+            data = await res.json();
+          } catch (err) {
+            data = null;
+          }
+
+          if (!data || typeof data.success === 'undefined') {
+            showResult(
+              false,
+              'Something went wrong',
+              'We could not read the confirmation response. Please try again later or contact us. / Nie udało się odczytać odpowiedzi. Spróbuj ponownie później lub skontaktuj się z nami.'
+            );
+            return;
+          }
+
+          showResult(
+            data.success,
+            data.success ? 'Email confirmed' : 'Confirmation failed',
+            data.message
+          );
+        })
+        .catch(() => {
+          showResult(
+            false,
+            'Connection problem',
+            'We could not reach the confirmation service. Please try again in a few minutes or contact us. / Nie udało się połączyć z usługą potwierdzającą. Spróbuj ponownie za chwilę lub skontaktuj się z nami.'
+          );
+        });
+    }
+  </script>
+</body>
+</html>
