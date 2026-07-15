@@ -175,7 +175,9 @@
         'This link is missing its confirmation code. Please use the link from your email. / Ten link nie zawiera kodu potwierdzającego. Skorzystaj z linku z maila.'
       );
     } else {
-      fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-confirm?token=' + encodeURIComponent(token))
+      fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-confirm?token=' + encodeURIComponent(token), {
+        headers: { 'ngrok-skip-browser-warning': 'true' }
+      })
         .then(async (res) => {
           let data;
           try {
