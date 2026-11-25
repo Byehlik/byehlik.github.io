@@ -910,7 +910,6 @@
       .btn-primary, .btn-ghost { width: 100%; text-align: center; }
     }
   </style>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -1064,15 +1063,14 @@
     <div class="apps-grid reveal">
 
       <div class="app-card" style="grid-column: 1 / -1;">
-        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--purple); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">Flagship · v1: Insurance Case</div>
+        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--purple); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;">Prototype · Case study: Insurance</div>
         <h3>Byehlik Contact Center Profitability Radar</h3>
-        <p>Python/ML application modeling CC cost, retention and people metrics across Lines of Business, sites and languages. Includes an AI assistant powered by GPT-4o and LLM usage tracking via Langfuse. Built from scratch - not a template.</p>
+        <p>A working decision-support prototype that models contact center cost, retention and people metrics across Lines of Business, sites and languages - from operational data to analysis, insight and decision support. In this example, we used predominantly synthetic data. Any remaining data was fully anonymized.</p>
         <div class="app-tech">
-          <span>Python</span><span>PyCaret</span><span>Streamlit</span><span>OpenAI GPT-4o</span><span>MLflow</span><span>Langfuse</span><span>Digital Ocean</span>
+          <span>Python</span><span>Machine learning</span><span>AI assistant</span>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center;">
-          <span class="app-status live">Live</span>
-          <button class="btn-primary open-demo-modal" style="font-size: 11px; padding: 8px 20px; border: none; cursor: pointer;">Request Demo Access →</button>
+          <span class="app-status soon">Walkthrough video coming soon</span>
         </div>
       </div>
 
@@ -1169,7 +1167,7 @@
     <div class="contact-inner">
       <div class="section-eyebrow">Contact</div>
       <h2 class="section-title reveal">Let's connect</h2>
-      <p class="section-sub reveal">Whether you are looking for senior transformation leadership, a consulting engagement, or want to see the Profitability Radar in action - let's talk.</p>
+      <p class="section-sub reveal">Whether you are looking for senior transformation leadership, a consulting engagement, or want to learn more about the Profitability Radar prototype - let's talk.</p>
       <a href="mailto:annarogowska@byehlik.com" class="contact-email reveal" aria-label="Email annarogowska@byehlik.com">
         <img src="Contact_purple.png" alt="Contact Anna" />
       </a>
@@ -1186,61 +1184,7 @@
     <span class="footer-right">byehlik.com</span>
   </footer>
 
-  <!-- DEMO REQUEST MODAL -->
-  <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-card">
-      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
-
-      <div class="modal-form" id="modalForm">
-        <div class="modal-eyebrow">Portfolio &middot; Profitability Radar</div>
-        <h2 class="modal-title" id="modalTitle">Access Profitability Radar</h2>
-        <p class="modal-desc">Profitability Radar is an early working version of a Byehlik application designed to support business data analysis, profitability review, and faster identification of areas requiring attention.<br><br>Register below to receive your individual access code and application link. Your access code will be generated automatically and sent to your email.</p>
-
-        <form id="demoForm" novalidate>
-          <div class="form-group" style="position:absolute; left:-9999px; top:-9999px;">
-            <label for="f-website">Website</label>
-            <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-name">Full name *</label>
-            <input class="form-input" type="text" id="f-name" name="name" placeholder="Anna Rogowska" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-email">Work email *</label>
-            <input class="form-input" type="email" id="f-email" name="email" placeholder="you@company.com" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-company">Company</label>
-            <input class="form-input" type="text" id="f-company" name="company" placeholder="Company name" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-role">Your role</label>
-            <input class="form-input" type="text" id="f-role" name="role" placeholder="CEO / Head of CC / HR Director..." />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="f-message">What are you working on? (optional)</label>
-            <textarea class="form-input" id="f-message" name="message" placeholder="Brief context - helps me tailor the access..."></textarea>
-          </div>
-          <div class="cf-turnstile" id="turnstileWidget" data-sitekey="0x4AAAAAAD1zU1_GOYdgg2YB" style="margin-bottom: 12px;"></div>
-          <button type="submit" class="btn-primary" style="width: 100%; margin-top: 8px; font-size: 13px; padding: 14px; border: none; cursor: pointer;" id="submitBtn">
-            Request access &rarr;
-          </button>
-          <p class="form-note">Your access code will be sent to your email within minutes. No spam, no subscriptions.</p>
-        </form>
-      </div>
-
-      <div class="modal-success" id="modalSuccess">
-        <div class="success-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4.5 4.5L16 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 style="font-family: var(--font-display); font-size: 24px; font-weight: 300; margin-bottom: 12px;">Request received</h3>
-        <p style="font-size: 14px; color: var(--silver); line-height: 1.65;">Your access code is on its way to your inbox. Check your email - it should arrive within a few minutes.</p>
-        <p style="margin-top: 16px; font-size: 13px; color: var(--fog);">Questions? <a href="mailto:annarogowska@byehlik.com" style="color: var(--lavender);">annarogowska@byehlik.com</a></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCROLL REVEAL + MODAL JS -->
+  <!-- SCROLL REVEAL JS -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -1255,93 +1199,6 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // DEMO MODAL
-    const modal = document.getElementById('demoModal');
-    const modalClose = document.getElementById('modalClose');
-    const demoForm = document.getElementById('demoForm');
-    const modalFormEl = document.getElementById('modalForm');
-    const modalSuccess = document.getElementById('modalSuccess');
-    const submitBtn = document.getElementById('submitBtn');
-
-    function openModal() {
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      document.getElementById('f-name').focus();
-    }
-
-    function closeModal() {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-      if (window.turnstile) turnstile.reset('#turnstileWidget');
-    }
-
-    document.querySelectorAll('.open-demo-modal').forEach(btn => {
-      btn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-    });
-
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-    demoForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // Honeypot: real users never see/fill this field. Non-empty = bot.
-      const honeypot = document.getElementById('f-website').value.trim();
-      if (honeypot) {
-        modalFormEl.classList.add('hidden');
-        modalSuccess.classList.add('visible');
-        return;
-      }
-
-      const name = document.getElementById('f-name').value.trim();
-      const email = document.getElementById('f-email').value.trim();
-      if (!name || !email) return;
-
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-
-      const turnstileTokenEl = document.querySelector('#turnstileWidget [name="cf-turnstile-response"]');
-
-      const payload = {
-        name,
-        email,
-        company: document.getElementById('f-company').value.trim(),
-        role: document.getElementById('f-role').value.trim(),
-        message: document.getElementById('f-message').value.trim(),
-        source: 'portfolio',
-        'cf-turnstile-response': turnstileTokenEl ? turnstileTokenEl.value : ''
-      };
-
-      let track1Ok = false;
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
-        const res = await fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-capture', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        track1Ok = res.ok;
-      } catch (err) {
-        track1Ok = false;
-      }
-
-      // Track 2 (Apps Script) is a fallback - only fires if Track 1 (n8n) failed or timed out after 5s
-      if (!track1Ok) {
-        await fetch('https://script.google.com/macros/s/AKfycbxAc5SiKTHTN_SAOAl09YprZdnnou_itY9orTHv483Lw_jJ_G7CskGoKU9DZKdhv5mt/exec', {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        }).catch(err => {});
-      }
-
-      modalFormEl.classList.add('hidden');
-      modalSuccess.classList.add('visible');
-      if (window.turnstile) turnstile.reset('#turnstileWidget');
-    });
   </script>
 
 </body>
