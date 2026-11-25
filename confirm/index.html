@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Confirm your email - Byehlik</title>
+  <title>Demo Access Paused — Byehlik</title>
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -135,80 +135,15 @@
       <img src="../Byehlik_logo_purple.png" alt="Byehlik" />
     </a>
 
-    <div id="state-loading">
-      <div class="icon"><div class="spinner"></div></div>
-      <h1>Confirming your email...</h1>
-      <p class="message">Just a moment - checking your confirmation link. / Chwila - sprawdzamy Twój link potwierdzający.</p>
+    <div class="icon error" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </div>
-
-    <div id="state-result" style="display:none;">
-      <div class="icon" id="result-icon"></div>
-      <h1 id="result-title"></h1>
-      <p class="message" id="result-message"></p>
-      <p class="contact-note">Questions? <a href="mailto:annarogowska@byehlik.com">annarogowska@byehlik.com</a></p>
-    </div>
+    <h1>Demo access paused</h1>
+    <p class="message">Online demo access to Profitability Radar is currently paused, so this confirmation link is no longer active. To learn more, please contact us.</p>
+    <p class="message" lang="pl">Dostęp do wersji demo Profitability Radar jest obecnie wstrzymany, więc ten link potwierdzający nie jest już aktywny. Aby dowiedzieć się więcej, skontaktuj się z nami.</p>
+    <p class="contact-note">Questions? <a href="mailto:annarogowska@byehlik.com">annarogowska@byehlik.com</a></p>
 
     <a href="/" class="back-link">Back to byehlik.com</a>
   </div>
-
-  <script>
-    const CHECK_ICON = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4.5 4.5L16 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    const X_ICON = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
-
-    function showResult(success, title, message) {
-      document.getElementById('state-loading').style.display = 'none';
-      const resultEl = document.getElementById('state-result');
-      const iconEl = document.getElementById('result-icon');
-      iconEl.classList.toggle('error', !success);
-      iconEl.innerHTML = success ? CHECK_ICON : X_ICON;
-      document.getElementById('result-title').textContent = title;
-      document.getElementById('result-message').textContent = message;
-      resultEl.style.display = 'block';
-    }
-
-    const token = new URLSearchParams(window.location.search).get('token');
-
-    if (!token) {
-      showResult(
-        false,
-        'Missing confirmation link',
-        'This link is missing its confirmation code. Please use the link from your email. / Ten link nie zawiera kodu potwierdzającego. Skorzystaj z linku z maila.'
-      );
-    } else {
-      fetch('https://lemon-overthrow-clock.ngrok-free.dev/webhook/lead-confirm?token=' + encodeURIComponent(token), {
-        headers: { 'ngrok-skip-browser-warning': 'true' }
-      })
-        .then(async (res) => {
-          let data;
-          try {
-            data = await res.json();
-          } catch (err) {
-            data = null;
-          }
-
-          if (!data || typeof data.success === 'undefined') {
-            showResult(
-              false,
-              'Something went wrong',
-              'We could not read the confirmation response. Please try again later or contact us. / Nie udało się odczytać odpowiedzi. Spróbuj ponownie później lub skontaktuj się z nami.'
-            );
-            return;
-          }
-
-          showResult(
-            data.success,
-            data.success ? 'Email confirmed' : 'Confirmation failed',
-            data.message
-          );
-        })
-        .catch(() => {
-          showResult(
-            false,
-            'Connection problem',
-            'We could not reach the confirmation service. Please try again in a few minutes or contact us. / Nie udało się połączyć z usługą potwierdzającą. Spróbuj ponownie za chwilę lub skontaktuj się z nami.'
-          );
-        });
-    }
-  </script>
 </body>
 </html>
